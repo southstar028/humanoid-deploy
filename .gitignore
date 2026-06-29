@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+# Do NOT commit policies, the SDK wheel, large data, or videos to this public repo
+# (see DEPENDENCIES.md). Keep these patterns on their own lines — .gitignore has no
+# inline comments.
+*.onnx
+*.whl
+*.pkl
+*.pt
+*.mp4
+*.webm
+# robot meshes/assets come from the public description repo, not this one
+sim_test/assets/
+# runtime logs
+sim_test/logs/

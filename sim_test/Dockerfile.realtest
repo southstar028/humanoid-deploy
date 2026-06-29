@@ -1,0 +1,18 @@
+# Local sim2sim-over-DDS test image: NUC-parity (Ubuntu 24.04 / py3.12 / glibc 2.39)
+# with the IGRIS-C SDK wheel + mujoco + onnxruntime + redis client preinstalled.
+# No robot needed -- runs the real low-level server against a MuJoCo "fake robot" stub
+# that speaks the same rt/lowcmd / rt/lowstate DDS as the real machine.
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && \
+    apt-get install -y -qq python3 python3-pip python3-numpy libssl3 \
+        libgl1 libegl1 libglfw3 >/dev/null && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY vendor/ /tmp/wheels/
+RUN pip3 install --break-system-packages -q \
+        /tmp/wheels/igris_c_sdk-2.0.2*.whl \
+        mujoco==3.9.0 onnxruntime redis pyyaml
+
+WORKDIR /work
