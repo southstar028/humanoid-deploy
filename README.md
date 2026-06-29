@@ -1,4 +1,9 @@
-# Real-Robot RL Deployment — Whole-Body Sim-to-Real
+# Real-Robot RL Deployment — Validated Without the Robot
+
+**The entire control path — policy inference, DDS comms, and the safety bring-up — is
+exercised and validated against a *simulated* robot over the real SDK's DDS interface, before
+any hardware is ever powered on.** That robot-free "sim2sim-over-DDS" gate is the core of this
+project.
 
 A sim-to-real deployment stack that runs a **29-DoF whole-body RL tracking policy** on a
 **humanoid robot's onboard computer** — a CPU-only NUC (Ubuntu 24.04 / Python 3.12, no GPU).
