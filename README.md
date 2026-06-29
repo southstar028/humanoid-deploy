@@ -30,7 +30,9 @@ It comprises a low-level control server that runs the policy on **CPU** over the
   clamping, velocity rate-limiting, a lowstate watchdog, and damping shutdown on exit.
 - **Verification without hardware.** A MuJoCo "fake robot" stub speaks the SDK's own DDS
   topics, so the *unmodified* production server can be validated end-to-end — serialization,
-  namespaces, kinematic modes, and closed-loop tracking — with no robot in the loop.
+  namespaces, kinematic modes, and closed-loop tracking — with no robot in the loop. The
+  loopback run can also be rendered to video headlessly (offscreen EGL → `ffmpeg`), with no
+  display attached.
 - **A lean runtime.** Inference is CPU `onnxruntime`; the server and feeder need neither
   IsaacGym, PyTorch, nor a ROS 2 build on the robot's onboard computer.
 
@@ -61,7 +63,7 @@ and publishes PD targets; the firmware closes the PD loop.
 | `teleop/xrobot_teleop_to_igris.py` | live PICO → IGRIS-C teleoperation publisher (uses GMR retargeting) |
 | `sim_test/dds_robot_stub.py` | MuJoCo "fake robot" that speaks the SDK's `rt/lowcmd` / `rt/lowstate` topics |
 | `sim_test/Dockerfile.realtest` | onboard-parity test image (Ubuntu 24.04 / Python 3.12) |
-| `scripts/` | `setup_nuc.sh` · `run_sim_test.sh` · `run_real.sh` |
+| `scripts/` | `setup_nuc.sh` · `run_sim_test.sh` · `run_sim_test_record.sh` (renders the loopback to mp4) · `run_real.sh` |
 | `docs/POLICY_IO.md` | the policy's observation/action contract — the code is fully legible without the weights |
 | `DEPENDENCIES.md` | where the external (public) components come from |
 
@@ -93,6 +95,7 @@ bash scripts/setup_nuc.sh && source ~/igris_deploy_venv/bin/activate
 # 2) robot-free pre-flight (dev host + Docker): production server vs. MuJoCo stub, over DDS
 bash scripts/run_sim_test.sh                  # standing
 bash scripts/run_sim_test.sh <motion.pkl>     # track an offline motion
+bash scripts/run_sim_test_record.sh <motion.pkl> out.mp4   # same, recorded to mp4 (headless)
 
 # 3) real robot — only after the gate passes (read Safety first)
 bash scripts/run_real.sh --dry_run_no_torque  # publish lowcmd with motors OFF
