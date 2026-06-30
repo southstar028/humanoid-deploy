@@ -84,6 +84,22 @@ commissioning: confirming the live DDS namespace / network interface, and the IM
 cross-check on the first boot frame. The staged bring-up and `--dry_run_no_torque` mode exist
 precisely to close these safely.
 
+## Demo
+
+Each validation run below was recorded headlessly (offscreen EGL → `ffmpeg`, no display
+attached). Add a **YouTube link** or an **mp4** for each clip in the table — paste a watch URL,
+or drag-drop an mp4 into the GitHub web editor (it becomes an `…/assets/…` link) or commit it
+under [`media/`](media/) and use a relative path.
+
+<!-- VIDEO SLOTS — replace each "_add link / mp4_" below with a YouTube URL or media/<file>.mp4 -->
+
+| clip | what it shows | link |
+|---|---|---|
+| sim2sim parity gate | adopted policy: 60 s stand (no fall, sub-degree jitter) + turning-gait tracking + dynamic transition | _add link / mp4_ |
+| DDS loopback — stand | production server ↔ MuJoCo stub over DDS: stable standing | _add link / mp4_ |
+| DDS loopback — gait | turning-gait reference tracked over DDS | _add link / mp4_ |
+| DDS loopback — VR motion | offline VR-captured motion (`turn → shelf → handle-open`) tracked end-to-end, in-container, no fall | [▶ clip](https://youtu.be/oxXnaQ5MqQ0) |
+
 ## Running it
 
 With the external components in place (see `DEPENDENCIES.md`) and a 29-DoF policy provided:
@@ -122,7 +138,7 @@ than bundled** (details in `DEPENDENCIES.md`):
 | `igris_c_sdk` wheel | manufacturer binary | [`robrosinc/igris_c_sdk_public`](https://github.com/robrosinc/igris_c_sdk_public) (`dist/`) |
 | Robot URDF / MJCF / meshes | large; manufacturer-published | [`robrosinc/igris_c_description_public`](https://github.com/robrosinc/igris_c_description_public) |
 | GMR retargeting package | third-party (MIT) | the GMR project (imported by the teleop publisher) |
-| Demo / loopback videos | large binaries | linked separately |
+| Demo / loopback videos | large binaries | see [Demo](#demo) (linked or under `media/`) |
 
 ## Tech stack
 
