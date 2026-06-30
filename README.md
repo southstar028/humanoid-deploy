@@ -146,5 +146,8 @@ Python · ONNX Runtime (CPU) · CycloneDDS (via the IGRIS-C SDK) · MuJoCo · Re
 
 ## License
 
-Released under the MIT License (see `LICENSE`). Inline code comments are in Korean (original
-engineering notes); all documentation here is in English.
+Released under the **PolyForm Noncommercial License 1.0.0** — free to use, modify, and share for
+noncommercial purposes; commercial use is not permitted (see [LICENSE](LICENSE)). This covers only
+the original code and documentation here; it grants no rights to the IGRIS-C SDK, robot assets, or
+trained policies, which are not included. Inline code comments are in Korean (original engineering
+notes); all documentation here is in English.
